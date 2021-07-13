@@ -34,22 +34,17 @@ router.get('/workouts', async (req, res) =>
     }
 });
 
-router.get('/workouts/range', async (req, res) =>
+router.get('/workouts/range', (req, res) =>
 {
     try
     {
-        const wkt = await Workout.find({})
+        Workout.find({})
         .sort({ day: -1})
-        .poulate('exercises');
-
-        if(!wkt)
+        .poulate('exercises')
+        .then((wkt) =>
         {
-            res.status(400).json({message:'huh didnt seem to like that...'})
-        }
-        else
-        {
-            res.status(200).json(wkt);
-        }
+            res.json(wkt);
+        });
     }
     catch(err)
     {
@@ -60,6 +55,8 @@ router.get('/workouts/range', async (req, res) =>
 router.post('/workouts', async (req, res) =>
 {
     try{
+
+        console.log(req.body);
         const wkt = await Workout.create(req.body);
 
         if(!wkt)
@@ -73,7 +70,7 @@ router.post('/workouts', async (req, res) =>
     }
     catch(err)
     {
-        res.status(500).json(err);
+        res.status(500).json({message: err});
     }
 });
 
@@ -81,15 +78,12 @@ router.put('/workouts/:id', async (req, res) =>
 {
     try
     {
-        const wkt = await Workout.findByIDAndUpdate(
+        const wkt = await Workout.findByIdAndUpdate(
+            {_id: req.params.id},
             {
-                _id: params.id
-            },
-            {
-                $inc: {totalDuration: body.duration},
-                $push: {exercises: body}
-            }
-        );  
+                $inc: {totalDuration: req.body.duration},
+                $push: {exercises: req.body}
+            });  
 
         if(!wkt)
         {
@@ -102,8 +96,10 @@ router.put('/workouts/:id', async (req, res) =>
     }
     catch(err)
     {
-        res.status(500).json(err);
+        res.status(500).json({message: err});
     }
 });
+
+module.exports = router;
 
 

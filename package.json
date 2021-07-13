@@ -4,8 +4,8 @@
   "description": "A fitness Tracker",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js",
+    "start": "node index.js",
+    "watch": "nodemon index.js",
     "seed": "node seeders/seed.js"
   },
   "repository": {
@@ -21,7 +21,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.13.2",
-    "morgan": "^1.10.0",
-    "npm": "^7.19.1"
+    "morgan": "^1.10.0"
   }
 }
