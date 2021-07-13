@@ -1,0 +1,27 @@
+{
+  "name": "fitnesstracker",
+  "version": "1.0.0",
+  "description": "A fitness Tracker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "seed": "node seeders/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Koxuvar/FitnessTracker.git"
+  },
+  "author": "connor sullivan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Koxuvar/FitnessTracker/issues"
+  },
+  "homepage": "https://github.com/Koxuvar/FitnessTracker#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0",
+    "npm": "^7.19.1"
+  }
+}
